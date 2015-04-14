@@ -21,6 +21,9 @@
     "parallel",
     "wd"
   ],
-  "author": "Vincent Voyer <vincent.voyer@gmail.com>",
-  "license": "MIT"
+  "author": "Matthew Abrams",
+  "license": "MIT",
+  "devDependencies": {
+    "browserstack-webdriver": "^2.41.1"
+  }
 }

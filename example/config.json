@@ -9,6 +9,11 @@
       "browserstack.user": "<browserstack.user>",
       "browserstack.key": "<browserstack.key>"
   }, {
+      "browserName": "internet explorer",
+      "version": "11.0",
+      "browserstack.user": "<browserstack.user>",
+      "browserstack.key": "<browserstack.key>"
+  }, {
       "browserName": "chrome",
       "version": "22.0",
       "browserstack.user": "<browserstack.user>",

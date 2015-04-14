@@ -1,4 +1,5 @@
-var wd = require('wd');
+var webdriver = require('browserstack-webdriver');
+
 var async = require('async');
 
 module.exports = browse;
@@ -8,19 +9,24 @@ function browse(url, desired, remoteCfg, cb) {
         remoteCfg = undefined;
     }
 
-    var browser = wd.remote(remoteCfg);
+    var driver = new webdriver.Builder().
+      usingServer('http://hub.browserstack.com/wd/hub').
+      withCapabilities(desired).
+      build();
 
-    // browser.on('status', logStatus);
-    // browser.on('command', logCommand);
-
-    async.series([
-        browser.init.bind(browser, desired),
-        wait4(100),
-        browser.get.bind(browser, url),
-        wait4(1000)
-    ], function(err) {
-        cb(err, browser);
-    });
+      async.series([
+        function(callback) {
+          driver.get("http://www.google.com").then(callback());
+        },
+        function(callback) {
+          driver.isElementPresent({id: "foo"}).then(callback());
+        },
+        function(callback) {
+          driver.takeScreenshot().then(callback());
+        }
+      ], function(err) {
+        cb(err, driver);
+      });
 }
 
 function logStatus(info) {
